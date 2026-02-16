@@ -9,7 +9,7 @@ const RoomDetails = () => {
     const[mainImage, setMainImage] = useState(null)
 
     useEffect(()=> {
-        const room = roomsDummyData.find(room => room._id=== id)
+        const room = roomsDummyData.find(room => room._id === id)
         room && setRoom(room)
         room && setMainImage(room.images[0])
     }, [])
