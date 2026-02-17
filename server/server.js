@@ -1,9 +1,17 @@
 import express from "express"
 import "dotenv/config";
 import cors from "cors";
+import connectDB from "./configs/db.js";
+import { clerkMiddleware } from '@clerk/express'
+
+
+connectDB()
 
 const app = express()
+
 app.use(cors())
+app.use(express.json())
+app.use(clerkMiddleware())
 
 app.get('/', (request, response)=> response.send("API functional"))
 
