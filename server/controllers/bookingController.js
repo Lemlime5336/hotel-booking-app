@@ -4,7 +4,7 @@ import Room from "../models/Room.js";
 
 const checkAvailability = async ({checkInDate, checkOutDate, room}) => {
     try {
-        const bookings = await Booking.find({ // ✅ fixed typo: bookinf → bookings
+        const bookings = await Booking.find({ 
             room,
             checkInDate: {$lte: checkOutDate},
             checkOutDate: {$gte: checkInDate}
@@ -76,7 +76,7 @@ export const getUserBookings = async(req, res) => {
 
 export const getHotelBookings = async (req, res) => {
     try {
-        const hotel = await Hotel.findOne({owner: req.user._id}); // ✅ fixed from req.auth.userId
+        const hotel = await Hotel.findOne({owner: req.user._id});
         if(!hotel){
             return res.json({success:false, message:"No hotel found"});
         }
