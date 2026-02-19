@@ -73,7 +73,7 @@ booking-app/
 
 1. **Clone the repository**
 ```bash
-git clone <your-repo-url>
+git clone Lemlime5336/hotel-booking-app
 cd booking-app
 ```
 
@@ -173,4 +173,4 @@ npm run dev
 ## Deployment
 
 - **Frontend** — Deployed on Vercel
-- **Backend** — Can be deployed on Railway, Render, or any Node.js hosting
+- **Backend** — Can be deployed on Railway, Render, or any Node.js hosting (currently deployed on Vercel)
