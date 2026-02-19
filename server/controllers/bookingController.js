@@ -1,3 +1,4 @@
+import transporter from "../configs/nodemailer.js";
 import Booking from "../models/Booking.js"
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
@@ -57,6 +58,26 @@ export const createBooking = async (req, res) => {
             checkOutDate,
             totalPrice
         })
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: req.user.email,
+            subject: 'Hotel Booking Confirmation',
+            html:`
+            <h2>Your Booking Details</h2>
+            <p>Dear ${req.user.username},</p>
+            <p>Find attached your booking details with us: </p>
+            <ul>
+                <li><strong>Booking ID: ${booking._id}</strong></li>
+                <li><strong>Hotel name: ${roomData.hotel.name}</strong></li>
+                <li><strong>Location: ${roomData.hotel.address}</strong></li>
+                <li><strong>Date: ${booking.checkInDate.toDateString()}</strong></li>
+                <li><strong>Booking Amount: ${process.env.currency || 'RM'} ${booking.totalPrice} / night</strong></li>
+            </ul>
+            <p>We hope you have a lovely time with us.</p>
+            `
+        }
+        await transporter.sendMail(mailOptions)
+
         res.json({success:true, message:"Booking successful"})
     } catch (error) {
         console.log(error)
